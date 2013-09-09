@@ -7,6 +7,7 @@ DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SITE_ROOT, os.pardir))
 OUTER_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir))
+DB_ROOT = os.path.join(OUTER_ROOT, 'db')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -20,7 +21,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_ROOT, 'db.sqlite3'),                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(DB_ROOT, 'db.sqlite3'),                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         # 'USER': '',
         # 'PASSWORD': '',
