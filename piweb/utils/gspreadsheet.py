@@ -22,4 +22,4 @@ class GSpreadsheetUpdater(object):
 			self.spreadsheetkey,
 			self.worksheetid
 		)
-		
+		return result
