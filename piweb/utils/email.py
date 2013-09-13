@@ -13,6 +13,7 @@ class EMailSender(object):
 	
 	def logout(self):
 		self.server.quit()
+		self.server = None
 	
 	def sendmail(self, fromaddr, toaddrs, subject, body):
 		msg = 'Subject: ' + subject + '\n\n' + body
