@@ -10,7 +10,7 @@ class TempReader(object):
 		self.temp_sensor_pin = temp_sensor_pin
 		self.base_dir  = '/sys/bus/w1/devices/'
 		self.device_folder = glob.glob(
-			base_dir + 
+			self.base_dir + 
 			str(self.temp_sensor_pin) +
 			'*')[0]
 		self.device_file = device_folder + '/w1_slave'
