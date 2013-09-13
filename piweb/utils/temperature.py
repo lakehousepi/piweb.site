@@ -13,7 +13,7 @@ class TempReader(object):
 			self.base_dir + 
 			str(self.temp_sensor_pin) +
 			'*')[0]
-		self.device_file = device_folder + '/w1_slave'
+		self.device_file = self.device_folder + '/w1_slave'
 
 	def read_temp_raw(self):
 		f = open(self.device_file, 'r')
