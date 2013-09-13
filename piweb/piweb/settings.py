@@ -156,6 +156,7 @@ INSTALLED_APPS = (
 
 	'south',
 	'tastypie',
+	'piweb',
 )
 
 # A sample logging configuration. The only tangible logging
