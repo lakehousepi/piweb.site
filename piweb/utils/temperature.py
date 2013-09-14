@@ -21,7 +21,7 @@ class TempReader(object):
 		f.close()
 		return lines
 
-	def read_temp(self, scale='C'):
+	def read_temp(self):
 		lines = self.read_temp_raw()
 		while lines[0].strip()[-3:] != 'YES':
 			time.sleep(0.2)
@@ -30,8 +30,9 @@ class TempReader(object):
 		if equals_pos != -1:
 			temp_string = lines[1][equals_pos+2:]
 			temp_c = float(temp_string)/1000.0
-		if scale.upper() == 'F':
 			temp_f = (temp_c * 180.0/100.0) + 32.0
-			return temp_f
-		else:
-			return temp_c
+		tempdict = {
+			'temp_c': temp_c,
+			'temp_f': temp_f
+		}
+		return tempdict
