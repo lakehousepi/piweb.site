@@ -1,6 +1,6 @@
 import smtplib
 
-class EMailSender(object):
+class EmailSender(object):
 	def __init__(self, servername, username, password):
 		self.servername = servername
 		self.username = username
