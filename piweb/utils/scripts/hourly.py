@@ -1,5 +1,5 @@
 import json
-import time
+import datetime
 
 from utils.email import EmailSender
 from utils.gspreadsheet import GSpreadsheetUpdater
@@ -15,13 +15,21 @@ def hourly():
 	
 	datadict = {}
 	
+	timestamp = datetime.datetime.now()
+	datadict['date'] = timestamp.strftime('%m/%d/%Y')
+	datadict['time'] = timestamp.strftime('%H:%M:%S')
+
 	tr = TempReader(temp_sensor_pin=pins.TEMP_SENSOR)
-	datadict.update(tr.read_temp())
+	temp = tr.read_temp()
+	datadict['tempcentigrade'] = str(temp['temp_c'])
+	datadict['tempfarenheit'] = str(temp['temp_f'])
 	
-	datadict.update(both_ip())
-	
+	ipaddrs = both_ip()
+	datadict['localip'] = ipaddrs['local_ip']
+	datadict['globalip'] = ipaddrs['global_ip']
 	
 	datastring = json.dumps(datadict)
+	
 	es = EmailSender(servername=gdocs.SERVERNAME, username=gdocs.USERNAME,
 			password=gdocs.PASSWORD)
 	es.sendmail(fromaddr=gdocs.USERNAME, toaddrs=['jbrodie@gmail.com'],
