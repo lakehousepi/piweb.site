@@ -29,7 +29,7 @@ def gatherdata():
 	
 	local_ipr = IPReading(
 		ipseries=local_ips,
-		value=ipaddrs['local_ip']
+		value=ipaddrs['local_ip'],
 		timestamp=timestamp
 	)
 	local_ipr.save()
