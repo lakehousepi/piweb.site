@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from tastypie.api import Api
-from piweb.api import IPReadingResource, IPSeriesResource, TempReadingResource,
-	TempSeriesResource
+from piweb.api import (IPReadingResource, IPSeriesResource, TempReadingResource,
+	TempSeriesResource)
 
 piweb_api = Api(api_name='piweb')
 piweb_api.register(IPReadingResource())
