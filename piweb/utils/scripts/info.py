@@ -37,7 +37,7 @@ def info():
 	
 	infoemaillist = []
 	for u in infousers:
-		infoemaillist.push(u.email)
+		infoemaillist.append(u.email)
 	
 	es = EmailSender(servername=gdocs.SERVERNAME, username=gdocs.USERNAME,
 			password=gdocs.PASSWORD)
