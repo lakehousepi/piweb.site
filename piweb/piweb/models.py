@@ -42,10 +42,35 @@ class TempReading(models.Model):
 		return td
 	
 	def __unicode__(self):
-		selfstring = u'TempReading: %(tempseries)s=%(value)s%(scale)s@%(timestamp)s' % {
+		selfstring = u'%(tempseries)s=%(value)s%(scale)s@%(timestamp)s' % {
 			'tempseries': self.tempseries.name,
 			'value': self.value,
 			'scale': self.scale,
+			'timestamp': self.timestamp.strftime('%Y%m%d %H:%M:%S')
+		}
+		return selfstring
+
+class IPSeries(models.Model):
+	name = name = models.CharField(max_length=200, unique=True)
+	description = models.TextField(null=True, blank=True)
+	
+	def __unicode__(self):
+		return u'%s' % self.name
+
+class IPReading(models.Model):
+	ipseries = models.ForeignKey('IPSeries')
+	timestamp = models.DateTimeField()
+	value = models.IPAddressField()
+	
+	class Meta:
+		unique_together = (
+			('ipseries', 'timestamp'),
+		)
+	
+	def __unicode__(self):
+		selfstring = u'%(tempseries)s=%(value)s@%(timestamp)s' % {
+			'ipseries': self.ipseries.name,
+			'value': self.value,
 			'timestamp': self.timestamp.strftime('%Y%m%d %H:%M:%S')
 		}
 		return selfstring
