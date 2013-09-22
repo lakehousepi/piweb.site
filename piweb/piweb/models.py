@@ -68,7 +68,7 @@ class IPReading(models.Model):
 		)
 	
 	def __unicode__(self):
-		selfstring = u'%(tempseries)s=%(value)s@%(timestamp)s' % {
+		selfstring = u'%(ipseries)s=%(value)s@%(timestamp)s' % {
 			'ipseries': self.ipseries.name,
 			'value': self.value,
 			'timestamp': self.timestamp.strftime('%Y%m%d %H:%M:%S')
