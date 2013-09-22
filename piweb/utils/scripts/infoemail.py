@@ -11,7 +11,7 @@ from utils.config import gdocs, pins
 
 from django.contrib.auth.models import Group, User
 
-def info():
+def infoemail():
 	green = LEDController(led_pin=pins.GREEN_LED)
 	green.on()
 	
