@@ -1,47 +1,44 @@
 import json
 import datetime
 
-from utils.email import EmailSender
-from utils.gspreadsheet import GSpreadsheetUpdater
 from utils.ip import both_ip
 from utils.led import LEDController
 from utils.temperature import TempReader
 
-from utils.config import gdocs, pins
+from utils.config import pins
 
-from django.contrib.auth.models import Group, User
+from piweb.models import IPReading, IPSeries, TempReading, TempSeries
 
-def infoemail():
+def gatherdata():
 	green = LEDController(led_pin=pins.GREEN_LED)
 	green.on()
 	
-	datadict = {}
-	
-	timestamp = datetime.datetime.now()
-	datadict['date'] = timestamp.strftime('%m/%d/%Y')
-	datadict['time'] = timestamp.strftime('%H:%M:%S')
-
-	tr = TempReader(temp_sensor_pin=pins.TEMP_SENSOR)
-	temp = tr.read_temp()
-	datadict['tempcentigrade'] = str(temp['temp_c'])
-	datadict['tempfarenheit'] = str(temp['temp_f'])
-	
+	# Get IP data, snap timestamp, insert data
 	ipaddrs = both_ip()
-	datadict['localip'] = ipaddrs['local_ip']
-	datadict['globalip'] = ipaddrs['global_ip']
+	timestamp = datetime.datetime.now()	
 	
-	datastring = json.dumps(datadict)
+	global_ips = IPSeries.objects.get(name='Global')
+	local_ips = IPSeries.objects.get(name='Local')
 	
-	infogroup = Group.objects.get(name='Test')
-	infousers = infogroup.user_set.all()
+	global_ipr = IPReading(
+		ipseries=global_ips,
+		value=ipaddrs['global_ip'],
+		timestamp=timestamp
+	)
+	global_ipr.save()
 	
-	infoemaillist = []
-	for u in infousers:
-		infoemaillist.append(u.email)
+	local_ipr = IPReading(
+		ipseries=local_ips,
+		value=ipaddrs['local_ip']
+		timestamp=timestamp
+	)
+	local_ipr.save()
 	
-	es = EmailSender(servername=gdocs.SERVERNAME, username=gdocs.USERNAME,
-			password=gdocs.PASSWORD)
-	es.sendmail(fromaddr=gdocs.USERNAME, toaddrs=infoemaillist,
-			subject='Temperature update', body=datastring)
+	# Get temp data, snap timestamp, insert data
+	#upstairs_ts = TempSeries.objects.get(name='Upstairs')
+
+	
+	#tr = TempReader(temp_sensor_pin=pins.TEMP_SENSOR)
+	#temp = tr.read_temp()
 	
 	green.off()
