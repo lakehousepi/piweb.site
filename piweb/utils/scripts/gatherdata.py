@@ -35,10 +35,17 @@ def gatherdata():
 	local_ipr.save()
 	
 	# Get temp data, snap timestamp, insert data
-	#upstairs_ts = TempSeries.objects.get(name='Upstairs')
-
+	tr = TempReader(temp_sensor_pin=pins.TEMP_SENSOR)
+	temp = tr.read_temp()
+	timestamp = datetime.datetime.now()
 	
-	#tr = TempReader(temp_sensor_pin=pins.TEMP_SENSOR)
-	#temp = tr.read_temp()
+	upstairs_ts = TempSeries.objects.get(name='Upstairs')
+	upstairs_tr = TempReading(
+		tempseries=upstairs_ts,
+		value=temp['temp_f'],
+		scale='F',
+		timestamp=timestamp
+	)
+	upstairs_tr.save()
 	
 	green.off()
