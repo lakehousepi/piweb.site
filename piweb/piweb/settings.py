@@ -81,7 +81,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	os.path.join(SITE_ROOT, 'static'),
+    os.path.join(SITE_ROOT, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -103,14 +103,14 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-	'django.contrib.auth.context_processors.auth',
-	'django.core.context_processors.debug',
-	'django.core.context_processors.i18n',
-	'django.core.context_processors.media',
-	'django.core.context_processors.static',
-	'django.core.context_processors.tz',
-	'django.contrib.messages.context_processors.messages',
-	'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -124,11 +124,11 @@ MIDDLEWARE_CLASSES = (
 )
 
 MESSAGE_TAGS = {
-	message_constants.DEBUG: 'alert alert-info',
-	message_constants.INFO: 'alert alert-info',
-	message_constants.SUCCESS: 'alert alert-success',
-	message_constants.WARNING: 'alert alert-warning',
-	message_constants.ERROR: 'alert alert-error'
+    message_constants.DEBUG: 'alert alert-info',
+    message_constants.INFO: 'alert alert-info',
+    message_constants.SUCCESS: 'alert alert-success',
+    message_constants.WARNING: 'alert alert-warning',
+    message_constants.ERROR: 'alert alert-error'
 }
 
 ROOT_URLCONF = 'piweb.urls'
@@ -154,10 +154,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 
-	'south',
-	'tastypie',
-	'piweb',
-	'utils',
+    'south',
+    'tastypie',
+    'piweb',
+    'utils',
 )
 
 # A sample logging configuration. The only tangible logging
