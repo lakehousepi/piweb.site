@@ -1,4 +1,7 @@
 from django.views.generic import TemplateView
+from piweb.models import TempReading, TempSeries
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
