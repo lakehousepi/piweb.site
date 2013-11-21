@@ -21,7 +21,7 @@ class TestView(TemplateView):
         imgdata = StringIO.StringIO()
         canvas.print_svg(imgdata)
         
-        imgstr = imgdata.get_data()
+        imgstr = imgdata.getvalue()
         
         context = super(TestView, self).get_context_data(**kwargs)
         context['svgtext'] = imgstr
