@@ -15,7 +15,7 @@ class TestView(TemplateView):
         fig = Figure()
         ax = fig.add_subplot(1,1,1)
         ax.scatter(x, y, c='b')
-        fig.set(facecolor=None)
+        fig.set(facecolor='g')
         canvas = FigureCanvas(fig)
         
         imgdata = StringIO.StringIO()
