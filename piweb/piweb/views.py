@@ -19,7 +19,7 @@ class TestView(TemplateView):
         canvas = FigureCanvas(fig)
         
         imgdata = StringIO.StringIO()
-        canvas.print_svg(imgdata)
+        canvas.print_svg(imgdata, transparent=True)
         
         imgstr = imgdata.getvalue()
         
