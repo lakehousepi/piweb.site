@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from tastypie.api import Api
 from piweb.api import (IPReadingResource, IPSeriesResource, TempReadingResource,
-	TempSeriesResource)
+    TempSeriesResource)
 
 from piweb.views import TestView
 
@@ -27,8 +27,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-	# Tastypie API hookup
-	url(r'^api/', include(piweb_api.urls)),
-	
-	url(r'^test/', TestView.as_view(), name='test'),
+    # Tastypie API hookup
+    url(r'^api/', include(piweb_api.urls)),
+    
+    url(r'^test/', TestView.as_view(), name='test'),
 )

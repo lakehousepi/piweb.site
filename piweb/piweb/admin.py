@@ -2,16 +2,16 @@ from django.contrib import admin
 from piweb.models import IPReading, IPSeries, TempReading, TempSeries
 
 class IPReadingAdmin(admin.ModelAdmin):
-	pass
+    pass
 
 class IPSeriesAdmin(admin.ModelAdmin):
-	pass
+    pass
 
 class TempReadingAdmin(admin.ModelAdmin):
-	pass
+    pass
 
 class TempSeriesAdmin(admin.ModelAdmin):
-	pass
+    pass
 
 admin.site.register(IPReading, IPReadingAdmin)
 admin.site.register(IPSeries, IPSeriesAdmin)
