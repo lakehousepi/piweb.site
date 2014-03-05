@@ -3,6 +3,7 @@ from piweb.models import TempReading, TempSeries
 import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import seaborn as sbn
 import StringIO
 
 class TestView(TemplateView):
@@ -15,7 +16,7 @@ class TestView(TemplateView):
         fig = Figure()
         ax = fig.add_subplot(1,1,1)
         ax.scatter(x, y, c='b')
-        fig.set(facecolor='g')
+        fig.set(facecolor='w')
         canvas = FigureCanvas(fig)
         
         imgdata = StringIO.StringIO()
