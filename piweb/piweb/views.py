@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 from piweb.models import TempReading, TempSeries
 import numpy as np
+import pandas as pd
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import seaborn as sbn
@@ -9,18 +10,23 @@ import StringIO
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
     def get_context_data(self, **kwargs):
-        data = np.random.randn(10) * 20
-        x = data + np.random.randn(10)
-        y = 3 * data + np.random.randn(10)
-        
+        upstairs = TempSeries.objects.get(name='Upstairs')
+        upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')
+
+        frame = pd.DataFrame(list(upstairstemps.values()))
+        frame.set_index('timestamp', inplace=True)
+       
         fig = Figure()
         ax = fig.add_subplot(1,1,1)
-        ax.scatter(x, y, c='b')
+        frame['value'].plot(ax=ax)
+        ax.get_xaxis().grid(color='w', linewidth=1)
+    	ax.get_yaxis().grid(color='w', linewidth=1)
+
         fig.set(facecolor='w')
         canvas = FigureCanvas(fig)
         
         imgdata = StringIO.StringIO()
-        canvas.print_svg(imgdata, transparent=True)
+        canvas.print_svg(imgdata)
         
         imgstr = imgdata.getvalue()
         
