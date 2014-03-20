@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 from tastypie.api import Api
 from piweb.api import (IPReadingResource, IPSeriesResource, TempReadingResource,
@@ -32,3 +33,10 @@ urlpatterns = patterns('',
     
     url(r'^test/', TestView.as_view(), name='test'),
 )
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'__debug__/', include(debug_toolbar.urls)),
+    )
+
