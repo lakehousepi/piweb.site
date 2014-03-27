@@ -13,6 +13,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
+INTERNAL_IPS = ('127.0.0.1', '66.9.65.50', )
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -125,6 +127,12 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+#DEBUG_TOOLBAR_PANELS = (
+#    'debug_toolbar.panels.version.VersionDebugPanel',
+#    'debug_toolbar.panels.timer.TimerDebugPanel',
+#    'debug_toolbar_line_profiler.panel.ProfilingPanel',
+#)
+
 MESSAGE_TAGS = {
     message_constants.DEBUG: 'alert alert-info',
     message_constants.INFO: 'alert alert-info',
@@ -157,6 +165,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'debug_toolbar',
+    'debug_toolbar_line_profiler',
     'south',
     'tastypie',
     'piweb',

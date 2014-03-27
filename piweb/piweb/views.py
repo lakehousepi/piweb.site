@@ -17,7 +17,7 @@ class TestView(TemplateView):
         frame = pd.DataFrame(list(upstairstemps.values()))
         frame.set_index('timestamp', inplace=True)
        
-        matplotlib.rcParams['svg.fonttype'] = 'none'
+        # matplotlib.rcParams['svg.fonttype'] = 'none'
 
         fig = Figure()
         ax = fig.add_subplot(1,1,1)
