@@ -144,7 +144,8 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logging.LoggingPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',
 
-    'debug_toolbar_line_profiler.panel.ProfilingPanel',
+#    'debug_toolbar_line_profiler.panel.ProfilingPanel',
+    'debug_toolbar.panels.profiling.ProfilingPanel',
 )
 
 MESSAGE_TAGS = {
