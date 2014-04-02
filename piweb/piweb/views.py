@@ -10,6 +10,7 @@ import StringIO
 
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
+    
     def get_context_data(self, **kwargs):
         upstairs = TempSeries.objects.get(name='Upstairs')
         upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')[:300]

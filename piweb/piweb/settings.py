@@ -131,6 +131,7 @@ MIDDLEWARE_CLASSES = (
 #    'debug_toolbar.panels.version.VersionDebugPanel',
 #    'debug_toolbar.panels.timer.TimerDebugPanel',
 #    'debug_toolbar_line_profiler.panel.ProfilingPanel',
+#    'debug_toolbar.panels.profiling.ProfilingPanel',
 #)
 
 MESSAGE_TAGS = {
@@ -165,7 +166,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'debug_toolbar',
-    'debug_toolbar_line_profiler',
+    # 'debug_toolbar_line_profiler',
     'south',
     'tastypie',
     'piweb',
