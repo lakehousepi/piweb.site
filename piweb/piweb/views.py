@@ -44,6 +44,7 @@ class TestView(TemplateView):
 def testview2(request):
     df = pd.DataFrame({'a': np.random.randn(10), 'b': np.random.randn(10)})
     htmltable = df.to_html()
+    context = {}
     context['htmltable'] = htmltable
 
     return render(request, 'piweb/test2.html', context)
