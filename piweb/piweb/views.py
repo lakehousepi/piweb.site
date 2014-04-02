@@ -8,6 +8,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import seaborn as sbn
 import StringIO
+from debug_toolbar_line_profiler import profile_additional
 
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
@@ -48,3 +49,7 @@ def testview2(request):
     context['htmltable'] = htmltable
 
     return render(request, 'piweb/test2.html', context)
+
+@profile_additional(TestView.get_context_data)
+def testview3(request):
+    return TestView.as_view()(request)
