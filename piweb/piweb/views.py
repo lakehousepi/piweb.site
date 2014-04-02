@@ -36,6 +36,6 @@ class TestView(TemplateView):
         
         context = super(TestView, self).get_context_data(**kwargs)
         context['svgtext'] = imgstr
-        context['htmltable'] = frame[:20].to_html()
+        context['htmltable'] = frame[:5].to_html()
 
         return context
