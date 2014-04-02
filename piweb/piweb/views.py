@@ -17,7 +17,7 @@ class TestView(TemplateView):
 
         frame = pd.DataFrame(list(upstairstemps.values()))
         frame.set_index('timestamp', inplace=True)
-       
+        
         # matplotlib.rcParams['svg.fonttype'] = 'none'
 
         fig = Figure()
@@ -36,5 +36,6 @@ class TestView(TemplateView):
         
         context = super(TestView, self).get_context_data(**kwargs)
         context['svgtext'] = imgstr
-        
+        context['htmltable'] = frame[:20].to_html()
+
         return context
