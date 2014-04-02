@@ -5,7 +5,7 @@ from tastypie.api import Api
 from piweb.api import (IPReadingResource, IPSeriesResource, TempReadingResource,
     TempSeriesResource)
 
-from piweb.views import TestView
+from piweb.views import TestView, testview2
 
 piweb_api = Api(api_name='piweb')
 piweb_api.register(IPReadingResource())
@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^api/', include(piweb_api.urls)),
     
     url(r'^test/', TestView.as_view(), name='test'),
+    url(r'^test2/', testview2, name='test2'),
 )
 
 if settings.DEBUG:

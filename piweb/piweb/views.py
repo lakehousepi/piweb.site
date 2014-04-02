@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import render
 from piweb.models import TempReading, TempSeries
 import numpy as np
 import pandas as pd
@@ -39,3 +40,10 @@ class TestView(TemplateView):
         context['htmltable'] = frame[:5].to_html()
 
         return context
+
+def testview2(request):
+    df = pd.DataFrame({'a': np.random.randn(10), 'b': np.random.randn(10)})
+    htmltable = df.to_html()
+    context['htmltable'] = htmltable
+
+    return render(request, 'piweb/test2.html', context)
