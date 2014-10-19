@@ -15,7 +15,7 @@ class TestView(TemplateView):
     
     def get_context_data(self, **kwargs):
         upstairs = TempSeries.objects.get(name='Upstairs')
-        upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')[:300]
+        upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')[:22464]
 
         frame = pd.DataFrame(list(upstairstemps.values()))
         frame.set_index('timestamp', inplace=True)
@@ -38,7 +38,7 @@ class TestView(TemplateView):
         
         context = super(TestView, self).get_context_data(**kwargs)
         context['svgtext'] = imgstr
-        context['htmltable'] = frame[:5].to_html()
+        context['htmltable'] = frame[:12].to_html()
 
         return context
 
