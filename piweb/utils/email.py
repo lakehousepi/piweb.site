@@ -16,7 +16,10 @@ class EmailSender(object):
         self.server = None
     
     def sendmail(self, fromaddr, toaddrs, subject, body):
-        msg = 'Subject: ' + subject + '\n\n' + body
+        msg = 'From: ' + fromaddr + '\n'
+        msg += 'To: ' + ', '.join(toaddrs) + '\n'
+        msg += 'Subject: ' + subject + '\n\n'
+        msg += body
         self.login()
         self.server.sendmail(fromaddr, toaddrs, msg)
         self.logout()
