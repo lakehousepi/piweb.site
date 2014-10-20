@@ -32,7 +32,7 @@ def infoemail():
     
     datastring = json.dumps(datadict)
     
-    infogroup = Group.objects.get(name='Test')
+    infogroup = Group.objects.get(name='Daily Email')
     infousers = infogroup.user_set.all()
     
     infoemaillist = []
