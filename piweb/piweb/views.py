@@ -14,7 +14,7 @@ class TestView(TemplateView):
     template_name = 'piweb/test.html'
     
     def get_context_data(self, **kwargs):
-        lim = self.GET.get('limit', 3000)
+        lim = self.request.GET.get('limit', 3000)
 
         upstairs = TempSeries.objects.get(name='Upstairs')
         upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')[:lim]
