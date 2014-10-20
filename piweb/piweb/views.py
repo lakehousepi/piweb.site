@@ -15,7 +15,7 @@ class TestView(TemplateView):
     
     def get_context_data(self, **kwargs):
         upstairs = TempSeries.objects.get(name='Upstairs')
-        upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')[:22464]
+        upstairstemps = upstairs.tempreading_set.all().order_by('-timestamp')[:3000]
 
         frame = pd.DataFrame(list(upstairstemps.values()))
         frame.set_index('timestamp', inplace=True)

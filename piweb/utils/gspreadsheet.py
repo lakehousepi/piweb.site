@@ -12,7 +12,7 @@ class GSpreadsheetUpdater(object):
         self.spr_client = gdss.SpreadsheetsService()
         self.spr_client.email = self.username
         self.spr_client.password = self.password
-        self.spr_client.source = 'RaspberryPi data insertion script'
+        self.spr_client.source = 'RaspberryPi data insertion script' if self.source is None else self.source
         self.spr_client.ProgrammaticLogin()
     
     def insertrow(self, datadict):
