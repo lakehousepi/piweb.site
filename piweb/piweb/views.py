@@ -8,6 +8,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import seaborn as sbn
 import StringIO
+import psutil
 from debug_toolbar_line_profiler import profile_additional
 
 class TestView(TemplateView):
@@ -41,6 +42,7 @@ class TestView(TemplateView):
         context = super(TestView, self).get_context_data(**kwargs)
         context['svgtext'] = imgstr
         context['htmltable'] = frame[:12].to_html()
+        context['mempct'] = psutil.virtual_memory().percent
 
         return context
 
