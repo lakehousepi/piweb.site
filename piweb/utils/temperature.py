@@ -6,13 +6,21 @@ class TempReader(object):
     def __init__(self, temp_sensor_pin):
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
-        
+ 
         self.temp_sensor_pin = temp_sensor_pin
         self.base_dir  = '/sys/bus/w1/devices/'
-        self.device_folder = glob.glob(
-            self.base_dir + 
-            str(self.temp_sensor_pin) +
-            '*')[0]
+        counter = 0
+        incomplete = True
+        while counter < 5 and incomplete:
+            try:
+                self.device_folder = glob.glob(
+                    self.base_dir + 
+                    str(self.temp_sensor_pin) +
+                    '*')[0]
+                incomplete = False
+            except IndexError:
+                counter += 1
+                time.sleep(10)
         self.device_file = self.device_folder + '/w1_slave'
 
     def read_temp_raw(self):
