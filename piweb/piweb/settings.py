@@ -14,10 +14,10 @@ TEMPLATE_DEBUG = DEBUG
 # DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # INTERNAL_IPS = (
-    '127.0.0.1', 
-    '66.9.65.50', 
-    '72.227.232.160',
-)
+#    '127.0.0.1', 
+#    '66.9.65.50', 
+#    '72.227.232.160',
+#)
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
