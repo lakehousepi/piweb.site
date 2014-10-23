@@ -3,7 +3,7 @@ import json
 import netifaces
 
 def global_ip_from_jsonip():
-	jsonstring = requests.get('http://jsonip.com').text()
+	jsonstring = requests.get('http://jsonip.com').text
 	jsonobj = json.loads(jsonstring)
 	ip = jsonobj['ip']
 	return ip
