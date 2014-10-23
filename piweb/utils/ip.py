@@ -1,9 +1,9 @@
-import urllib
+import requests
 import json
 import netifaces
 
 def global_ip_from_jsonip():
-	jsonstring = urllib.URLopener().open('http://jsonip.com').read()
+	jsonstring = requests.get('http://jsonip.com').text()
 	jsonobj = json.loads(jsonstring)
 	ip = jsonobj['ip']
 	return ip
