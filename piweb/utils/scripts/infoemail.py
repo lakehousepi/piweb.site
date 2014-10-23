@@ -1,7 +1,7 @@
 import json
 import datetime
 
-from utils.email import EmailSender
+from utils.emailer import EmailSender
 from utils.gspreadsheet import GSpreadsheetUpdater
 from utils.ip import both_ip
 from utils.led import LEDController

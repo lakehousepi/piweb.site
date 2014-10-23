@@ -4,8 +4,8 @@ import time
 
 class TempReader(object):
     def __init__(self, temp_sensor_pin):
-        os.system('modprobe w1-gpio')
-        os.system('modprobe w1-therm')
+        os.system('/sbin/modprobe w1-gpio')
+        os.system('/sbin/modprobe w1-therm')
  
         self.temp_sensor_pin = temp_sensor_pin
         self.base_dir  = '/sys/bus/w1/devices/'
