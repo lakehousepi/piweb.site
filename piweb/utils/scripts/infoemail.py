@@ -30,7 +30,7 @@ def infoemail():
     datadict['localip'] = ipaddrs['local_ip']
     datadict['globalip'] = ipaddrs['global_ip']
     
-    datastring = json.dumps(datadict)
+    datastring = json.dumps(datadict, indent=4)
     
     infogroup = Group.objects.get(name='Daily Email')
     infousers = infogroup.user_set.all()
