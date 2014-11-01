@@ -5,5 +5,5 @@
 
 {% block content %}
 <p>{{ svgtext|safe }}</p>
-<p><img src="{{ pngtext|safe }}"></p>
+<p><img src="data:image/png;base64,{{ pngtext|safe }}"></p>
 {% endblock %}
