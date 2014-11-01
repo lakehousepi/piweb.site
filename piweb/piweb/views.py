@@ -64,8 +64,9 @@ class FourChartsView(TemplateView):
         pngstr = pngdata.getvalue()
         
         context = super(FourChartsView, self).get_context_data(**kwargs)
-        context['svgtext'] = svgstr
+        context['svgtext'] = None #svgstr
         context['pngtext'] = pngstr
+        assert(1==0)
 
         return context
 
