@@ -40,7 +40,7 @@ class FourChartsView(TemplateView):
         df = pd.DataFrame(list(upstairstemps.values()))
         df = df.set_index('timestamp')
                 
-        fig, axes = plt.subplots(2, 2, figsize=(10, 6), dpi=100)
+        fig, axes = plt.subplots(2, 2, figsize=(10, 6), dpi=200)
         for i, d in enumerate([360, 30, 7, 1]):
             ax = axes.flatten()[i]
             earlycut = now - relativedelta(days=d)
