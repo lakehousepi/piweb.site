@@ -53,13 +53,6 @@ class FourChartsView(TemplateView):
 
             ax.grid(b=True, which='major', color='w', linewidth=1.5)
             ax.grid(b=True, which='minor', color='w', linewidth=0.75)
-            
-        # fig.set(facecolor='w')
-        
-        # canvas = FigureCanvas(fig)
-        # svgdata = StringIO.StringIO()
-        # canvas.print_svg(svgdata)
-        # svgstr = svgdata.getvalue()
         
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
