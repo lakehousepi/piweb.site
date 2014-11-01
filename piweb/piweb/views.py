@@ -19,10 +19,17 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         today = dt.date.today()
         ayearago = today - relativedelta(years=1)
+        
+        upstairs = TempSeries.objects.get(name='Upstairs')
+        upstairstemps = upstairs.tempreading_set.filter(timestamp__gte=ayearago)
+        upstairstemps = upstairstemps.order_by('timestamp')
+        
+        df = pd.DataFrame(list(upstairstemps.values()))
 
         context = super(HomeView, self).get_context_data(**kwargs)
         context['today'] = today
         context['ayearago'] = ayearago
+        context['htmltable'] = df.tail(10).to_html()
         
         return context
 
