@@ -40,12 +40,13 @@ class FourChartsView(TemplateView):
         df = pd.DataFrame(list(upstairstemps.values()))
         df = df.set_index('timestamp')
                 
-        fig, axes = plt.subplots(2, 2, figsize=(10, 6), dpi=200)
+        fig, axes = plt.subplots(2, 2, figsize=(20, 12), dpi=200)
         for i, d in enumerate([360, 30, 7, 1]):
             ax = axes.flatten()[i]
             earlycut = now - relativedelta(days=d)
             data = df.loc[df.index>=earlycut, :]
             ax.plot(data.index, data['value'])
+            ax.xaxis_date()
             
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
             ax.get_yaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
