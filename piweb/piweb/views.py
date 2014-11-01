@@ -55,12 +55,17 @@ class FourChartsView(TemplateView):
         fig.set(facecolor='w')
         
         canvas = FigureCanvas(fig)
-        imgdata = StringIO.StringIO()
-        canvas.print_svg(imgdata)
-        imgstr = imgdata.getvalue()
+        svgdata = StringIO.StringIO()
+        canvas.print_svg(svgdata)
+        svgstr = svgdata.getvalue()
+        
+        pngdata = StringIO.StringIO()
+        canvas.print_png(svgdata)
+        pngstr = pngdata.get_value()
         
         context = super(FourChartsView, self).get_context_data(**kwargs)
-        context['svgtext'] = imgstr
+        context['svgtext'] = svgstr
+        context['pngtext'] = pngstr
 
         return context
 
