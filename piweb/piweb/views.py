@@ -20,6 +20,7 @@ class HomeView(TemplateView):
         today = dt.date.today()
         ayearago = today - relativedelta(years=1)
 
+        context = super(HomeView, self).get_context_data(**kwargs)
         context['today'] = today
         context['ayearago'] = ayearago
         
