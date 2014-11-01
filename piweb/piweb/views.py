@@ -1,12 +1,16 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from piweb.models import TempReading, TempSeries
+
 import numpy as np
 import pandas as pd
-import matplotlib
-from matplotlib.figure import Figure
+
+import matplotlib as mpl
+mpl.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import matplotlib.pyplot as plt
 import seaborn as sbn
+
 import StringIO
 import psutil
 import datetime as dt
@@ -17,28 +21,46 @@ class HomeView(TemplateView):
     template_name = 'piweb/home.html'
     
     def get_context_data(self, **kwargs):
-        today = dt.date.today()
-        ayearago = today - relativedelta(years=1)
-        
-        upstairs = TempSeries.objects.get(name='Upstairs')
-        upstairstemps = upstairs.tempreading_set.filter(timestamp__gte=ayearago)
-        upstairstemps = upstairstemps.order_by('timestamp')
-        
-        df = pd.DataFrame(list(upstairstemps.values()))
-
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['today'] = today
-        context['ayearago'] = ayearago
-        context['htmltable'] = df.tail(10).to_html()
-        
         return context
 
 class FourChartsView(TemplateView):
     template_name = 'piweb/fourcharts.html'
 
     def get_context_data(self, **kwargs):
+        now = dt.datetime.now()
+        ayearago = now - relativedelta(years=1)
+        
+        upstairs = TempSeries.objects.get(name='Upstairs')
+        upstairstemps = upstairs\
+                            .tempreading_set.filter(timestamp__gte=ayearago)\
+                            .order_by('timestamp')
+        
+        df = pd.DataFrame(list(upstairstemps.values()))\
+                .set_index('timestamp', inplace=True)
+                
+        fig, axes = plt.subplots(2, 2)
+        for i, d in enumerate([360, 30, 7, 1]):
+            ax = axes[i]
+            earlycut = now - relativedelta(days=d)
+            data = df[earlycut<=df.index]
+            ax.plot(data.index, data['value'])
+            
+            ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
+            ax.get_yaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
+
+            ax.grid(b=True, which='major', color='w', linewidth=1.5)
+            ax.grid(b=True, which='minor', color='w', linewidth=0.75)
+            
+        fig.set(facecolor='w')
+        
+        canvas = FigureCanvas(fig)
+        imgdata = StringIO.StringIO()
+        canvas.print_svg(imgdata)
+        imgstr = imgdata.getvalue()
+        
         context = super(FourChartsView, self).get_context_data(**kwargs)
-        context['test'] = 'test'
+        context['svgtext'] = imgstr
 
         return context
 
