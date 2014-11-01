@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import seaborn as sbn
 
 import StringIO
+import base64
 import psutil
 import datetime as dt
 from dateutil.relativedelta import relativedelta
@@ -64,7 +65,7 @@ class FourChartsView(TemplateView):
         
         context = super(FourChartsView, self).get_context_data(**kwargs)
         # context['svgstr'] = svgstr
-        context['pngstr'] = pngdata.getvalue()
+        context['pngstr'] = base64.b64encode(pngdata.getvalue())
         # assert(0==1)
 
         return context
