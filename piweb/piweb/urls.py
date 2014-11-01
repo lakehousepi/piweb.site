@@ -34,6 +34,7 @@ urlpatterns = patterns('',
     
     # Homepage
     url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^fourcharts/$', views.FourChartsView.as_view(), name='fourcharts'),
     
     url(r'^test/', views.TestView.as_view(), name='test'),
     url(r'^test2/', views.testview2, name='test2'),
