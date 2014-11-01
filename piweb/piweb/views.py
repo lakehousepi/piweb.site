@@ -52,20 +52,19 @@ class FourChartsView(TemplateView):
             ax.grid(b=True, which='major', color='w', linewidth=1.5)
             ax.grid(b=True, which='minor', color='w', linewidth=0.75)
             
-        fig.set(facecolor='w')
+        # fig.set(facecolor='w')
         
-        canvas = FigureCanvas(fig)
-        svgdata = StringIO.StringIO()
-        canvas.print_svg(svgdata)
-        svgstr = svgdata.getvalue()
+        # canvas = FigureCanvas(fig)
+        # svgdata = StringIO.StringIO()
+        # canvas.print_svg(svgdata)
+        # svgstr = svgdata.getvalue()
         
         pngdata = StringIO.StringIO()
-        canvas.print_png(pngdata)
-        pngstr = pngdata.getvalue()
+        fig.savefig(pngdata, format='png', facecolor='w')
         
         context = super(FourChartsView, self).get_context_data(**kwargs)
         context['svgstr'] = svgstr
-        context['pngstr'] = pngstr
+        context['pngstr'] = pngdata.getvalue()
         assert(0==1)
 
         return context
