@@ -63,7 +63,7 @@ class FourChartsView(TemplateView):
         fig.savefig(pngdata, format='png', facecolor='w')
         
         context = super(FourChartsView, self).get_context_data(**kwargs)
-        context['svgstr'] = svgstr
+        # context['svgstr'] = svgstr
         context['pngstr'] = pngdata.getvalue()
         assert(0==1)
 
