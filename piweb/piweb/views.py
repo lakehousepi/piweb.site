@@ -43,7 +43,7 @@ class FourChartsView(TemplateView):
         for i, d in enumerate([360, 30, 7, 1]):
             ax = axes[i]
             earlycut = now - relativedelta(days=d)
-            data = df.loc[earlycut:, :]
+            data = df.loc[df.index>=earlycut, :]
             ax.plot(data.index, data['value'])
             
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
