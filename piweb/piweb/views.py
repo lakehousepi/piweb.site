@@ -61,7 +61,7 @@ class FourChartsView(TemplateView):
         
         pngdata = StringIO.StringIO()
         canvas.print_png(svgdata)
-        pngstr = pngdata.get_value()
+        pngstr = pngdata.getvalue()
         
         context = super(FourChartsView, self).get_context_data(**kwargs)
         context['svgtext'] = svgstr
