@@ -41,7 +41,7 @@ class FourChartsView(TemplateView):
                 
         fig, axes = plt.subplots(2, 2)
         for i, d in enumerate([360, 30, 7, 1]):
-            ax = axes[i]
+            ax = axes.flatten()[i]
             earlycut = now - relativedelta(days=d)
             data = df.loc[df.index>=earlycut, :]
             ax.plot(data.index, data['value'])
