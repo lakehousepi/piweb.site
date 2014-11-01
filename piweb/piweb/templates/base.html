@@ -1,49 +1,70 @@
 {% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-
-    <title>Piweb | {% block title %}{% endblock %}</title>
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    {% block page_styles %}{% endblock %}
-  </head>
-
-  <body>
-    <header class="navbar bs-docs-nav" role="banner">
-      <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".bs-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Arcem Web</a>
-          </div>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" media="screen"/>
+        <style>
+            body {
+                padding-top: 50px;
+            }
+            .alert{
+                margin-bottom: 10px;
+            }
+            ul.breadcrumb {
+                margin-bottom: 10px;
+                font-size: 10px;
+                padding: 0px 15px;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css href" href="{% static 'css/bootstrap-responsive.css' %}" />
+        {% block extra-style %}
+        {% endblock %}
+        <script src="{% static 'js/jquery-1.10.1.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        {% block extra-script %}
+        {% endblock %}
+        <title>{% block title %}Piweb | {% endblock %}</title>
+    </head>
+    
+    <body>
+        <div class="navbar navbar-inverse nav navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    {% block brand %}
+                        <a class="brand" href="/">Piweb</a>
+                    {% endblock %}
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="divider-vertical"></li>
+														<li>test</li>
+                        </ul>
+                        <div class="pull-right">
+                            <ul class="nav pull-right">
+															<li>test</li>
+                            </ul><!--right side stuff-->
+                        </div><!--pull-right-->
+                    </div><!--nav-collapse-->
+                </div><!--container-->
+            </div><!--navbar-inner-->
+        </div><!--navbar-->
         
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/ipython">IPython</a></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div>
-      </nav>
-    </header>
-
-    <div id="page">
-      {% block content %}{% endblock %}
-    </div>
-
-    <!-- js libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Page specific js -->
-    {% block page_js %}{% endblock %}
-
-  </body>
+        <div class="container-fluid">
+            {% block breadcrumbs %}
+                {% include 'snippets/breadcrumbs.html' %}
+            {% endblock %}
+            
+            {% block messages %}
+                {% include 'snippets/messages.html' %}
+            {% endblock %}
+            
+            {% block content %}
+            {% endblock %}
+        </div><!--container-->
+    </body>
 </html>

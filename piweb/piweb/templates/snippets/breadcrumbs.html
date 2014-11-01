@@ -1,0 +1,18 @@
+{% if breadcrumbs %}
+    <div>
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li{% if not breadcrumb.1 %} class="active"{% endif %}>
+                    {% if breadcrumb.1 %}
+                        <a href={{ breadcrumb.1 }}>{{ breadcrumb.0 }}</a>
+                    {% else %}
+                        {{ breadcrumb.0 }}
+                    {% endif %}
+                    {% if not forloop.last %}
+                        <span class="divider">/</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
