@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{{ block.super }}Home{% endblock %}
 
 {% block content %}
-Hello World
+<div class="hero-unit">
+	<h1>Piweb</h1>
+	<p>Welcome to Piweb!</p>
+</div><!--hero-unit-->
 {% endblock %}
