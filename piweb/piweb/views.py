@@ -37,7 +37,7 @@ class FourChartsView(TemplateView):
                             .order_by('timestamp')
         
         df = pd.DataFrame(list(upstairstemps.values()))
-             #   .set_index('timestamp', inplace=True)
+        df = df.set_index('timestamp')
                 
         fig, axes = plt.subplots(2, 2)
         for i, d in enumerate([360, 30, 7, 1]):
