@@ -9,7 +9,21 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import seaborn as sbn
 import StringIO
 import psutil
+import datetime as dt
+from dateutil import relativedelta
 from debug_toolbar_line_profiler import profile_additional
+
+class HomeView(TemplateView):
+    template_name = 'piweb/home.html'
+    
+    def get_context_data(self, **kwargs):
+        today = dt.date.today()
+        ayearago = today - relativedelta(years=1)
+
+        context['today'] = today
+        context['ayearago'] = ayearago
+        
+        return context
 
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
