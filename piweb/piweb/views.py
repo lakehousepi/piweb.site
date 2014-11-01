@@ -36,7 +36,7 @@ class FourChartsView(TemplateView):
                             .tempreading_set.filter(timestamp__gte=ayearago)\
                             .order_by('timestamp')
         
-        df = list(upstairstemps.values())
+        df = pd.DataFrame(list(upstairstemps.values()))
              #   .set_index('timestamp', inplace=True)
                 
         fig, axes = plt.subplots(2, 2)
