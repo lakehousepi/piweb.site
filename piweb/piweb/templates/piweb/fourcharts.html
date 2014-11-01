@@ -4,6 +4,6 @@
 {% block title %}{{ block.super }}Four Charts{% endblock %}
 
 {% block content %}
-<p>{{ svgtext|safe }}</p>
-<p><img src="data:image/png;base64,{{ pngtext|safe }}"></p>
+<p>{{ svgstr|safe }}</p>
+<p><img src="data:image/png;base64,{{ pngstr|safe }}"></p>
 {% endblock %}
