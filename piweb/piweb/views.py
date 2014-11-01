@@ -10,7 +10,7 @@ import seaborn as sbn
 import StringIO
 import psutil
 import datetime as dt
-from dateutil import relativedelta
+from dateutil.relativedelta import relativedelta
 from debug_toolbar_line_profiler import profile_additional
 
 class HomeView(TemplateView):
