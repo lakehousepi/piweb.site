@@ -48,6 +48,8 @@ class FourChartsView(TemplateView):
             ax.plot(data.index, data['value'])
             ax.xaxis_date()
             
+            ax.get_xaxis().set_major_locator(mpl.ticker.AutoMajorLocator())
+            ax.get_yaxis().set_major_locator(mpl.ticker.AutoMajorLocator())
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
             ax.get_yaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
 
