@@ -47,13 +47,14 @@ class FourChartsView(TemplateView):
             data = df.loc[df.index>=earlycut, :]
             ax.plot(data.index, data['value'])
             ax.xaxis_date()
-            ax.autofmt_xdate()
             
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
             ax.get_yaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
 
             ax.grid(b=True, which='major', color='w', linewidth=1.5)
             ax.grid(b=True, which='minor', color='w', linewidth=0.75)
+        
+        fig.autofmt_xdate()
         
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
