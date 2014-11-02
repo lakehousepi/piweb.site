@@ -47,7 +47,8 @@ class FourChartsView(TemplateView):
             data = df.loc[df.index>=earlycut, :]
             ax.plot(data.index, data['value'])
             ax.xaxis_date()
-
+            ax.autofmt_xdate()
+            
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
             ax.get_yaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
 
