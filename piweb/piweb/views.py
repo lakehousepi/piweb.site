@@ -54,8 +54,8 @@ class FourChartsView(TemplateView):
             ax.grid(b=True, which='major', color='w', linewidth=1.5)
             ax.grid(b=True, which='minor', color='w', linewidth=0.75)
         
-        fig.autofmt_xdate()
-        
+            ax.xticks(rotation=30)
+            
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
         
