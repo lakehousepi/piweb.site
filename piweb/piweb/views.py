@@ -46,7 +46,6 @@ class FourChartsView(TemplateView):
             earlycut = now - relativedelta(days=d)
             data = df.loc[df.index>=earlycut, :]
             ax.plot(data.index, data['value'])
-            ax.xaxis_date()
             
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
             ax.get_yaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
@@ -54,6 +53,10 @@ class FourChartsView(TemplateView):
             ax.grid(b=True, which='major', color='w', linewidth=1.5)
             ax.grid(b=True, which='minor', color='w', linewidth=0.75)
                               
+	    plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
+
+	fig.tight_layout()
+
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
         
