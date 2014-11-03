@@ -30,7 +30,7 @@ class FourChartsView(TemplateView):
     template_name = 'piweb/fourcharts.html'
 
     def get_context_data(self, **kwargs):
-        now = dt.datetime.now(pytz.timezone('America/New_York')
+        now = dt.datetime.now(pytz.timezone('America/New_York'))
         ayearago = now - relativedelta(years=1)
         
         upstairs = TempSeries.objects.get(name='Upstairs')
