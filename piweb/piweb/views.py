@@ -54,6 +54,8 @@ class FourChartsView(TemplateView):
             ax.grid(b=True, which='minor', color='w', linewidth=0.75)
                               
             plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
+            
+            ax.set_title('Temperature data going back %d days' % d)
 
 	fig.tight_layout()
 
