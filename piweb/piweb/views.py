@@ -42,10 +42,12 @@ class FourChartsView(TemplateView):
         df = df.set_index('timestamp')
                 
         fig, axes = plt.subplots(2, 2, figsize=(15, 8), dpi=200)
-        for i, d in enumerate([360, 30, 7, 1]):
+        for (i, d), rsamp in zip(enumerate([360, 30, 7, 1]), ['d', 'h', None, None]):
             ax = axes.flatten()[i]
             earlycut = now - relativedelta(days=d)
             data = df.loc[df.index>=earlycut, :]
+            if rsamp:
+                data = data.resample(rule=rsamp, how='mean')
             ax.plot(data.index, data['value'])
             
             ax.get_xaxis().set_minor_locator(mpl.ticker.AutoMinorLocator())
