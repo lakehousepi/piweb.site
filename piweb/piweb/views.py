@@ -60,7 +60,7 @@ class FourChartsView(TemplateView):
             
             ax.set_title('Temperature data going back %d days' % d)
 
-	fig.tight_layout()
+        fig.tight_layout()
 
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
