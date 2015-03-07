@@ -86,22 +86,20 @@ class TestView(TemplateView):
         
         # matplotlib.rcParams['svg.fonttype'] = 'none'
 
-        fig = Figure()
-        ax = fig.add_subplot(1,1,1)
+        fig, ax = plt.subplots(1,1, figsize=(10, 10))
         frame['value'].plot(ax=ax)
         ax.get_xaxis().grid(color='w', linewidth=1)
     	ax.get_yaxis().grid(color='w', linewidth=1)
 
         fig.set(facecolor='w')
-        canvas = FigureCanvas(fig)
-        
-        imgdata = StringIO.StringIO()
-        canvas.print_svg(imgdata)
-        
-        imgstr = imgdata.getvalue()
+        fig.tight_layout()
+
+        svgdata = StringIO.StringIO()
+        fig.savefig(svgdata, format='svg', facecolor='w', bbox_inches='tight')
         
         context = super(TestView, self).get_context_data(**kwargs)
-        context['svgtext'] = imgstr
+        # context['svgstr'] = svgstr
+        context['svgtext'] = svgdata.getvalue()
         context['htmltable'] = frame[:12].to_html()
         context['mempct'] = psutil.virtual_memory().percent
 
