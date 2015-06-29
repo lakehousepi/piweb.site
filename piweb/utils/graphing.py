@@ -15,7 +15,7 @@ import seaborn as sbn
 from piweb.models import TempReading, TempSeries
 from django.conf import settings
 
-def make_four_graphs():
+def make_four_graphs(savefile=False, filepath=None):
     now = dt.datetime.now(pytz.timezone('America/New_York'))
     ayearago = now - relativedelta(years=1)
 
@@ -47,5 +47,8 @@ def make_four_graphs():
         ax.set_title('Temperature data going back %d days' % d)
 
     fig.tight_layout()
-    fig.savefig(os.path.join(settings.MEDIA_ROOT, 'fourgraphs.png'))
+    if savefile:
+        if filepath is None:
+            filepath = os.path.join(settings.MEDIA_ROOT, 'fourgraphs.png')
+        fig.savefig(filepath)
     return fig
