@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
+{% load humanize %}
 
 {% block title %}{{ block.super }}Home{% endblock %}
 
 {% block content %}
 <div class="hero-unit">
 	<h1>Piweb</h1>
-	<p>Welcome to Piweb!  The temperature was {{latest.value|floatformat:1}} at {{latest.timestamp}}</p>
-	<p>{{latest.timestamp}}</p>
+	<p>Welcome to Piweb!  The temperature was {{latest.value|floatformat:1}} at {{latest.timestamp|naturaltime}}</p>
 </div><!--hero-unit-->
 {% endblock %}
