@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import seaborn as sbn
 
 from piweb.models import TempReading, TempSeries
-from piweb.settings import STATIC_ROOT
+from django.conf import settings
 
 def make_four_graphs():
     now = dt.datetime.now(pytz.timezone('America/New_York'))
@@ -47,5 +47,5 @@ def make_four_graphs():
         ax.set_title('Temperature data going back %d days' % d)
 
     fig.tight_layout()
-    fig.savefig(os.path.join([STATIC_ROOT, 'fourgraphs.png']))
+    fig.savefig(os.path.join([settings.STATIC_ROOT, 'fourgraphs.png']))
     return fig
