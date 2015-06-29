@@ -15,8 +15,11 @@ from utils import graphing as pwgraph
 class HomeView(TemplateView):
     template_name = 'piweb/home.html'
 
+    latest = TempReading.objects.filter(tempseries__name='Upstairs').order_by('-timestamp')[0]
+
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
+        context['latest'] = latest
         return context
 
 class FourChartsView(TemplateView):
