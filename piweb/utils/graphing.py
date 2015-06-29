@@ -1,7 +1,6 @@
 import datetime as dt
+import pytz
 from dateutil.relativedelta import relativedelta
-
-from piweb.models import TempReading, TempSeries
 
 import numpy as np
 import pandas as pd
@@ -10,6 +9,8 @@ import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sbn
+
+from piweb.models import TempReading, TempSeries
 
 def make_four_graphs():
     now = dt.datetime.now(pytz.timezone('America/New_York'))
