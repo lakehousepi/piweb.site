@@ -3,7 +3,7 @@ from utils.led import LEDController
 
 import utils.graphing as pwgraphs
 
-def make_and_store_graphs():
+def makegraphs():
     green = LEDController(led_pin=pins.GREEN_LED)
     green.on()
 
