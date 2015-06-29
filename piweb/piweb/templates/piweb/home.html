@@ -6,7 +6,7 @@
 {% block content %}
 <div class="hero-unit">
 	<h1>Piweb</h1>
-	<p>Welcome to Piweb!</p>
+	<p>Welcome to Piweb!  The temperature was {{latest.value|floatformat:1}} at {{latest.timestamp}}</p>
 	<p>{{latest.timestamp}}</p>
 </div><!--hero-unit-->
 {% endblock %}
