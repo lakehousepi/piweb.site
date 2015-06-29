@@ -12,6 +12,7 @@ class IPReadingResource(ModelResource):
     class Meta:
         queryset = IPReading.objects.all()
         resource_name = 'ipreading'
+        order = ['timestamp', 'id', 'pk']
 
 class TempSeriesResource(ModelResource):
     class Meta:
@@ -23,3 +24,4 @@ class TempReadingResource(ModelResource):
     class Meta:
         queryset = TempReading.objects.all()
         resource_name = 'tempreading'
+        order = ['timestamp', 'id', 'pk']
