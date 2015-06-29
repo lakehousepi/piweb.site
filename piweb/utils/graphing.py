@@ -49,6 +49,6 @@ def make_four_graphs(savefile=False, filepath=None):
     fig.tight_layout()
     if savefile:
         if filepath is None:
-            filepath = os.path.join(settings.MEDIA_ROOT, 'fourgraphs.png')
+            filepath = os.path.join(settings.STATIC_ROOT, 'fourgraphs.png')
         fig.savefig(filepath)
     return fig
