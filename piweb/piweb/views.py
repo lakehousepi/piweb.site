@@ -8,12 +8,9 @@ import pandas as pd
 import StringIO
 import base64
 import psutil
-import datetime as dt
-import pytz
-from dateutil.relativedelta import relativedelta
 from debug_toolbar_line_profiler import profile_additional
 
-from piweb.utils import graphing as pwgraph
+from utils import graphing as pwgraph
 
 class HomeView(TemplateView):
     template_name = 'piweb/home.html'
@@ -26,16 +23,13 @@ class FourChartsView(TemplateView):
     template_name = 'piweb/fourcharts.html'
 
     def get_context_data(self, **kwargs):
-
+        fig = pwgraph.make_four_graphs()
 
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
 
         context = super(FourChartsView, self).get_context_data(**kwargs)
-        # context['svgstr'] = svgstr
         context['pngstr'] = base64.b64encode(pngdata.getvalue())
-        # assert(0==1)
-
         return context
 
 class TestView(TemplateView):
