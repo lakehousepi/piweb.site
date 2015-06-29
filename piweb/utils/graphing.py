@@ -47,5 +47,5 @@ def make_four_graphs():
         ax.set_title('Temperature data going back %d days' % d)
 
     fig.tight_layout()
-    fig.savefig(os.path.join(settings.STATIC_ROOT, 'fourgraphs.png'))
+    fig.savefig(os.path.join(settings.MEDIA_ROOT, 'fourgraphs.png'))
     return fig
