@@ -59,10 +59,10 @@ class TableView(TemplateView):
 
         df = pd.DataFrame(list(upstairstemps.values()))
         df = df.set_index('timestamp')
-        idx1 = list(df.index)[0]
+
         context['df'] = df
         context['tablehtml'] = df.to_html()
-        context['type'] = type(idx1)
+        context['idxtype'] = type(list(df.index)[0]))
         return context
 
 class TestView(TemplateView):
