@@ -31,11 +31,12 @@ urlpatterns = patterns('',
 
     # Tastypie API hookup
     url(r'^api/', include(piweb_api.urls)),
-    
+
     # Homepage
     url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^fourchartsstatic/$', views.FourChartsStaticView.as_view(), name='fourcharts_static'),
     url(r'^fourcharts/$', views.FourChartsView.as_view(), name='fourcharts'),
-    
+
     url(r'^test/', views.TestView.as_view(), name='test'),
     url(r'^test2/', views.testview2, name='test2'),
     url(r'^test3/', views.testview3, name='test3'),

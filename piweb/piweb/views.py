@@ -34,6 +34,9 @@ class FourChartsView(TemplateView):
         context['pngstr'] = base64.b64encode(pngdata.getvalue())
         return context
 
+class FourChartsStaticView(TemplateView):
+    template_name = 'piweb/fourchartsstatic.html'
+
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
 
