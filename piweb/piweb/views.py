@@ -59,7 +59,7 @@ class TableView(TemplateView):
 
         df = pd.DataFrame(list(upstairstemps.values()))
         df = df.set_index('timestamp')
-        #df.index = [tz.localize(d) for d in df.index]
+        df.index = [utctime.as_timezone(tz) for utctime in df.index]
 
         context['df'] = df
         context['tablehtml'] = df.to_html()
