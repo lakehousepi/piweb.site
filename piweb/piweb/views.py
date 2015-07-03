@@ -62,7 +62,7 @@ class TableView(TemplateView):
 
         context['df'] = df
         context['tablehtml'] = df.to_html()
-        context['idxtype'] = type(list(df.index))
+        context['idxtype'] = str(type(list(df.index)))
         return context
 
 class TestView(TemplateView):
