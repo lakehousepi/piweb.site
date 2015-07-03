@@ -25,17 +25,38 @@ class FourChartsDynamicView(TemplateView):
     template_name = 'piweb/fourchartsdynamic.html'
 
     def get_context_data(self, **kwargs):
+        context = super(FourChartsView, self).get_context_data(**kwargs)
         fig = pwgraph.make_four_graphs()
 
         pngdata = StringIO.StringIO()
         fig.savefig(pngdata, format='png', facecolor='w', bbox_inches='tight')
 
-        context = super(FourChartsView, self).get_context_data(**kwargs)
+
         context['pngstr'] = base64.b64encode(pngdata.getvalue())
         return context
 
 class FourChartsStaticView(TemplateView):
     template_name = 'piweb/fourchartsstatic.html'
+
+class TableView(TemplateView):
+    template_name = 'piweb/table.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TableView, self).get_context_data(**kwargs)
+
+        now = dt.datetime.now(pytz.timezone('America/New_York'))
+        adayago = now - relativedelta(days=1)
+        upstairs = TempSeries.objects.get(name='Upstairs')
+        upstairstemps = upstairs\
+                            .tempreading_set.filter(timestamp__gte=ayearago)\
+                            .order_by('timestamp')
+
+        df = pd.DataFrame(list(upstairstemps.values()))
+        df = df.set_index('timestamp')
+
+        context['df'] = df
+        context['tablehtml'] = df.to_html()    
+        return context
 
 class TestView(TemplateView):
     template_name = 'piweb/test.html'
