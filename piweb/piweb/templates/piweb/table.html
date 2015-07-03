@@ -4,5 +4,7 @@
 {% block title %}{{ block.super }}Table{% endblock %}
 
 {% block content %}
+{{ type }}
+
 {{ tablehtml|safe}}
 {% endblock %}
