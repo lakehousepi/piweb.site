@@ -26,7 +26,7 @@
         {% endblock %}
         <title>{% block title %}Piweb | {% endblock %}</title>
     </head>
-    
+
     <body>
         <div class="navbar navbar-inverse nav navbar-fixed-top">
             <div class="navbar-inner">
@@ -46,7 +46,7 @@
 															<a class="dropdown-toggle" href="#" data-toggle="dropdown">Weather Station<span class="caret"></span></a>
 													    <ul class="dropdown-menu">
 													        <li class="nav-header">Available pages</li>
-																	<li><a href="{% url 'fourcharts' %}">Four Charts</a></li>
+																	<li><a href="{% url 'fourchartsstatic' %}">Four Charts</a></li>
 													    </ul>
 														</li>
                         </ul>
@@ -59,16 +59,16 @@
                 </div><!--container-->
             </div><!--navbar-inner-->
         </div><!--navbar-->
-        
+
         <div class="container-fluid">
             {% block breadcrumbs %}
                 {% include 'snippets/breadcrumbs.html' %}
             {% endblock %}
-            
+
             {% block messages %}
                 {% include 'snippets/messages.html' %}
             {% endblock %}
-            
+
             {% block content %}
             {% endblock %}
         </div><!--container-->

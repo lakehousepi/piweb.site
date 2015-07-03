@@ -21,8 +21,8 @@ class HomeView(TemplateView):
         context['latest'] = latest
         return context
 
-class FourChartsView(TemplateView):
-    template_name = 'piweb/fourcharts.html'
+class FourChartsDynamicView(TemplateView):
+    template_name = 'piweb/fourchartsdynamic.html'
 
     def get_context_data(self, **kwargs):
         fig = pwgraph.make_four_graphs()
