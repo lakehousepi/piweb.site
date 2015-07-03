@@ -45,7 +45,8 @@ class TableView(TemplateView):
         context = super(TableView, self).get_context_data(**kwargs)
 
         now = dt.datetime.now(pytz.timezone('America/New_York'))
-        adayago = now - relativedelta(days=1)
+        daysback = kwargs.get('daysback', 1)
+        adayago = now - relativedelta(days=daysback)
         upstairs = TempSeries.objects.get(name='Upstairs')
         upstairstemps = upstairs\
                             .tempreading_set.filter(timestamp__gte=ayearago)\
@@ -55,7 +56,7 @@ class TableView(TemplateView):
         df = df.set_index('timestamp')
 
         context['df'] = df
-        context['tablehtml'] = df.to_html()    
+        context['tablehtml'] = df.to_html()
         return context
 
 class TestView(TemplateView):
