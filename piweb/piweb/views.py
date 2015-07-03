@@ -50,10 +50,10 @@ class TableView(TemplateView):
 
         now = dt.datetime.now(pytz.timezone('America/New_York'))
         daysback = kwargs.get('daysback', 1)
-        adayago = now - relativedelta(days=daysback)
+        starttime = now - relativedelta(days=daysback)
         upstairs = TempSeries.objects.get(name='Upstairs')
         upstairstemps = upstairs\
-                            .tempreading_set.filter(timestamp__gte=ayearago)\
+                            .tempreading_set.filter(timestamp__gte=starttime)\
                             .order_by('timestamp')
 
         df = pd.DataFrame(list(upstairstemps.values()))
