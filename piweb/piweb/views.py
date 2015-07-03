@@ -48,6 +48,7 @@ class TableView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TableView, self).get_context_data(**kwargs)
 
+        tz = pytz.timezone('America/New_York')
         now = dt.datetime.now(pytz.timezone('America/New_York'))
         daysback = kwargs.get('daysback', 1)
         starttime = now - relativedelta(days=daysback)
@@ -58,7 +59,7 @@ class TableView(TemplateView):
 
         df = pd.DataFrame(list(upstairstemps.values()))
         df = df.set_index('timestamp')
-        df.index = df.index.to_pydatetime()
+        df.index = [tz.localize(d) for d in df.index]
         
         context['df'] = df
         context['tablehtml'] = df.to_html()
