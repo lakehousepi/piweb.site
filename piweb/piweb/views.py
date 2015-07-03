@@ -49,7 +49,7 @@ class TableView(TemplateView):
         context = super(TableView, self).get_context_data(**kwargs)
 
         tz = pytz.timezone('America/New_York')
-        now = dt.datetime.now(pytz.timezone('America/New_York'))
+        now = dt.datetime.now(tz)
         daysback = kwargs.get('daysback', 1)
         starttime = now - relativedelta(days=daysback)
         upstairs = TempSeries.objects.get(name='Upstairs')
@@ -62,7 +62,7 @@ class TableView(TemplateView):
 
         context['df'] = df
         context['tablehtml'] = df.to_html()
-        context['idxtype'] = type(list(df.index)[0])
+        context['idxtype'] = type(list(df.index))
         return context
 
 class TestView(TemplateView):
