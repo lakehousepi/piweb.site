@@ -4,3 +4,4 @@ matplotlib/
 *~
 .DS_Store
 *.tmproj
+www_static/images/
