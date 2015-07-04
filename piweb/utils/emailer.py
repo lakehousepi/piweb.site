@@ -28,7 +28,7 @@ class EmailSender(object):
         self.server.sendmail(fromaddr, toaddrs, msg)
         self.logout()
 
-    def sendmail_html(self, fromaddr, toaddrs, subject, textbody=None, htmlbody=None):
+    def sendmail_html(self, fromaddr, toaddrs, subject, textbody, htmlbody):
         msg = mp.MIMEMultipart('alternative')
         msg['Subject'] = subject
         msg['From'] = fromaddr
@@ -49,11 +49,13 @@ class EmailSender(object):
                         </html>
                         """
 
-        part1 = tx.MIMEText(textbody, 'plain')
-        part2 = tx.MIMEText(htmlbody, 'html')
-
-        msg.attach(part1)
-        msg.attach(part2)
+        if textbody is not None:
+            part1 = tx.MIMEText(textbody, 'plain')
+            msg.attach(part1)
+        if htmlbody is not None:
+            part2 = tx.MIMEText(htmlbody, 'html')
+            msg.attach(part2)
+            
         self.login()
         self.server.sendmail(fromaddr, toaddrs, msg.as_string())
         self.logout()
