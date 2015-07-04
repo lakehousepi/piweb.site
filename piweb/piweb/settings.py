@@ -3,6 +3,8 @@ import os, socket
 import django
 from django.contrib.messages import constants as message_constants
 
+from utils.config import gdocs
+
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SITE_ROOT, os.pardir))
@@ -14,8 +16,8 @@ TEMPLATE_DEBUG = DEBUG
 # DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # INTERNAL_IPS = (
-#    '127.0.0.1', 
-#    '66.9.65.50', 
+#    '127.0.0.1',
+#    '66.9.65.50',
 #    '72.227.232.160',
 #)
 
@@ -187,6 +189,14 @@ INSTALLED_APPS = (
     'piweb',
     'utils',
 )
+
+# Email settings
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = gdocs.USERNAME
+EMAIL_HOST_PASSWORD = gdocs.PASSWORD
+DEFAULT_FROM_EMAIL = gdocs.USERNAME
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
