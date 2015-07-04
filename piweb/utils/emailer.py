@@ -1,4 +1,5 @@
-import email
+import email.mime.multipart as mp
+import email.mime.text as tx
 import smtplib
 
 from utils.config import gdocs
@@ -28,7 +29,7 @@ class EmailSender(object):
         self.logout()
 
     def sendmail_html(self, fromaddr, toaddrs, subject, textbody=None, htmlbody=None):
-        msg = email.mime.multipart.MIMEMultipart('alternative')
+        msg = mp.MIMEMultipart('alternative')
         msg['Subject'] = subject
         msg['From'] = fromaddr
         msg['To'] = ', '.join(toaddrs)
@@ -48,8 +49,8 @@ class EmailSender(object):
                         </html>
                         """
 
-        part1 = email.mime.text.MIMEText(textbody, 'plain')
-        part2 = email.mime.text.MIMEText(htmlbody, 'html')
+        part1 = tx.MIMEText(textbody, 'plain')
+        part2 = tx.MIMEText(htmlbody, 'html')
 
         msg.attach(part1)
         msg.attach(part2)
