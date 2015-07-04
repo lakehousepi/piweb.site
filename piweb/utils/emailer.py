@@ -1,12 +1,13 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from utils.config import gdocs
 
 class EmailSender(object):
-    def __init__(self, servername, username, password):
-        self.servername = servername
-        self.username = username
-        self.password = password
+    def __init__(self, servername=None, username=None, password=None):
+        self.servername = servername if servername is not None else gdocs.SERVERNAME
+        self.username = username if username is not None else gdocs.USERNAME
+        self.password = password if password is not None else gdocs.PASSWORD
 
     def login(self):
         self.server = smtplib.SMTP(self.servername)
