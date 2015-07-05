@@ -34,28 +34,13 @@ class EmailSender(object):
         msg['From'] = fromaddr
         msg['To'] = ', '.join(toaddrs)
 
-        if textbody is None:
-            textbody = 'Hello World'
-        if htmlbody is None:
-            htmlbody = """\
-                        <html>
-                          <head></head>
-                          <body>
-                            <p>Hi!<br>
-                               How are you?<br>
-                               Here is the <a href="http://www.python.org">link</a> you wanted.
-                            </p>
-                          </body>
-                        </html>
-                        """
-
         if textbody is not None:
             part1 = tx.MIMEText(textbody, 'plain')
             msg.attach(part1)
         if htmlbody is not None:
             part2 = tx.MIMEText(htmlbody, 'html')
             msg.attach(part2)
-            
+
         self.login()
         self.server.sendmail(fromaddr, toaddrs, msg.as_string())
         self.logout()
