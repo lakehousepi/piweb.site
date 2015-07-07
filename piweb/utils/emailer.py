@@ -52,17 +52,17 @@ class EmailSender(object):
         msg['From'] = fromaddr
         msg['To'] = ', '.join(toaddrs)
 
+        if imagepath is not None:
+            with open(imagepath, 'rb') as fp:
+                part3 = im.MIMEImage(fp.read())
+            part3.add_header('Content-ID', '<image1>')
+            msg.attach(part3)
         if textbody is not None:
             part1 = tx.MIMEText(textbody, 'plain')
             msg.attach(part1)
         if htmlbody is not None:
             part2 = tx.MIMEText(htmlbody, 'html')
             msg.attach(part2)
-        if imagepath is not None:
-            with open(imagepath, 'rb') as fp:
-                part3 = im.MIMEImage(fp.read())
-            part3.add_header('Content-ID', '<image1>')
-            msg.attach(part3)
 
         self.login()
         self.server.sendmail(fromaddr, toaddrs, msg.as_string())
