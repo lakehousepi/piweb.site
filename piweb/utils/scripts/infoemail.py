@@ -13,7 +13,7 @@ from utils.temperature import TempReader
 from utils.config import gdocs, pins
 
 from django.contrib.auth.models import Group, User
-from django.settings import STATIC_ROOT
+from django.conf import settings
 
 def infoemail():
     green = LEDController(led_pin=pins.GREEN_LED)
@@ -126,6 +126,6 @@ def infoemail_html_with_image():
             password=gdocs.PASSWORD)
     es.sendmail_html_with_image(fromaddr=gdocs.USERNAME, toaddrs=infoemaillist,
             subject='Temperature update (html)', textbody=datastring,
-            htmlbody=h, imagepath=os.path.join(STATIC_ROOT, images, 'fourgraphs.png'))
+            htmlbody=h, imagepath=os.path.join(settings.STATIC_ROOT, images, 'fourgraphs.png'))
 
     green.off()
