@@ -61,7 +61,7 @@ class EmailSender(object):
         if imagepath is not None:
             with open(imagepath, 'rb') as fp:
                 part3 = im.MIMEImage(fp.read())
-            # part3.add_header('Content-ID', '<image1>')
+            part3.add_header('Content-ID', '<image1>')
             msg.attach(part3)
 
         self.login()
