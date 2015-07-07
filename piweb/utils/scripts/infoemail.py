@@ -126,6 +126,6 @@ def infoemail_html_with_image():
             password=gdocs.PASSWORD)
     es.sendmail_html_with_image(fromaddr=gdocs.USERNAME, toaddrs=infoemaillist,
             subject='Temperature update (html)', textbody=datastring,
-            htmlbody=h, imagepath=os.path.join(settings.STATIC_ROOT, images, 'fourgraphs.png'))
+            htmlbody=h, imagepath=os.path.join(settings.STATIC_ROOT, 'images', 'fourgraphs.png'))
 
     green.off()
