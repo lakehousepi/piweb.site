@@ -1,5 +1,6 @@
 import email.mime.multipart as mp
 import email.mime.text as tx
+import email.mime.image as im
 import smtplib
 
 from utils.config import gdocs
@@ -40,6 +41,28 @@ class EmailSender(object):
         if htmlbody is not None:
             part2 = tx.MIMEText(htmlbody, 'html')
             msg.attach(part2)
+
+        self.login()
+        self.server.sendmail(fromaddr, toaddrs, msg.as_string())
+        self.logout()
+
+    def sendmail_html_with_image(self, fromaddr, toaddrs, subject, textbody, htmlbody, imagepath):
+        msg = mp.MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = fromaddr
+        msg['To'] = ', '.join(toaddrs)
+
+        if textbody is not None:
+            part1 = tx.MIMEText(textbody, 'plain')
+            msg.attach(part1)
+        if htmlbody is not None:
+            part2 = tx.MIMEText(htmlbody, 'html')
+            msg.attach(part2)
+        if imagepath is not None:
+            with open(imagepath, 'rb') as fp:
+                part3 = im.MIMEImage(fp.read())
+            part3.add_header('Content-ID', '<image1>')
+            msg.attach(part3)
 
         self.login()
         self.server.sendmail(fromaddr, toaddrs, msg.as_string())
