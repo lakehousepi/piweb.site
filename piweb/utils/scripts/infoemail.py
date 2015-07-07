@@ -77,7 +77,7 @@ def infoemail_html():
         infoemaillist.append(u.email)
 
     t = loader.get_template('utils/email.html')
-    c = Context({'infodict': datadict})
+    c = Context({'dd': datadict})
     h = t.render(c)
 
     es = EmailSender(servername=gdocs.SERVERNAME, username=gdocs.USERNAME,
