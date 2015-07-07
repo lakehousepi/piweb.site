@@ -1,5 +1,6 @@
 import json
 import datetime
+import os
 
 from django.template import Context, loader
 
@@ -12,6 +13,7 @@ from utils.temperature import TempReader
 from utils.config import gdocs, pins
 
 from django.contrib.auth.models import Group, User
+from django.settings import STATIC_ROOT
 
 def infoemail():
     green = LEDController(led_pin=pins.GREEN_LED)
@@ -85,5 +87,45 @@ def infoemail_html():
     es.sendmail_html(fromaddr=gdocs.USERNAME, toaddrs=infoemaillist,
             subject='Temperature update (html)', textbody=datastring,
             htmlbody=h)
+
+    green.off()
+
+def infoemail_html_with_image():
+    green = LEDController(led_pin=pins.GREEN_LED)
+    green.on()
+
+    datadict = {}
+
+    timestamp = datetime.datetime.now()
+    datadict['date'] = timestamp.strftime('%m/%d/%Y')
+    datadict['time'] = timestamp.strftime('%H:%M:%S')
+
+    tr = TempReader(temp_sensor_pin=pins.TEMP_SENSOR)
+    temp = tr.read_temp()
+    datadict['tempcentigrade'] = str(temp['temp_c'])
+    datadict['tempfarenheit'] = str(temp['temp_f'])
+
+    ipaddrs = both_ip()
+    datadict['localip'] = ipaddrs['local_ip']
+    datadict['globalip'] = ipaddrs['global_ip']
+
+    datastring = json.dumps(datadict, indent=4)
+
+    infogroup = Group.objects.get(name='Daily Email')
+    infousers = infogroup.user_set.all()
+
+    infoemaillist = []
+    for u in infousers:
+        infoemaillist.append(u.email)
+
+    t = loader.get_template('utils/email.html')
+    c = Context({'dd': datadict})
+    h = t.render(c)
+
+    es = EmailSender(servername=gdocs.SERVERNAME, username=gdocs.USERNAME,
+            password=gdocs.PASSWORD)
+    es.sendmail_html_with_image(fromaddr=gdocs.USERNAME, toaddrs=infoemaillist,
+            subject='Temperature update (html)', textbody=datastring,
+            htmlbody=h, imagepath=os.path.join(STATIC_ROOT, images, 'fourgraphs.png'))
 
     green.off()
