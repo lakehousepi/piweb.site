@@ -29,7 +29,7 @@ class FourChartsDynamicView(TemplateView):
     template_name = 'piweb/fourchartsdynamic.html'
 
     def get_context_data(self, **kwargs):
-        context = super(FourChartsView, self).get_context_data(**kwargs)
+        context = super(FourChartsDynamicView, self).get_context_data(**kwargs)
         fig = pwgraph.make_four_graphs()
 
         pngdata = StringIO.StringIO()
