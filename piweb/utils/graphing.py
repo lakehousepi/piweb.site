@@ -26,6 +26,7 @@ def make_four_graphs(savefile=False, filepath=None):
 
     df = pd.DataFrame(list(upstairstemps.values()))
     df = df.set_index('timestamp')
+    df.index = df.index.tz_convert('America/New_York')
 
     fig, axes = plt.subplots(2, 2, figsize=(15, 8), dpi=200)
     for (i, d), rsamp in zip(enumerate([360, 30, 7, 1]), ['d', 'h', None, None]):
