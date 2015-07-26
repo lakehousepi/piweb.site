@@ -45,7 +45,16 @@ def make_four_graphs(savefile=False, filepath=None):
 
         plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
 
-        ax.set_title('Temperature data going back %d days' % d)
+        title = 'Temperature data going back %d day' % d
+        if d > 1:
+            title += 's'
+        ax.set_title(title)
+
+    for i in range(len(axes.flatten()) - 1):
+        thisax = axes.flatten()[i]
+        nextax = axes.flatten()[i + 1]
+        nextlow, nexthigh = nextax.get_ylim()
+        thisax.axvspan(nextlow, nexthigh, alpha=0.25, color='red')        
 
     fig.tight_layout()
     if savefile:
