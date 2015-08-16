@@ -1,8 +1,7 @@
-import os
+USERNAME = 'lakehousepi@gmail.com'
+PASSWORD = 'lakehousepi!'
+SERVERNAME = 'smtp.gmail.com:587'
 
-USERNAME         = os.environ['G_USERNAME']
-PASSWORD         = os.environ['G_PASSWORD']
-SERVERNAME       = os.environ['G_SERVERNAME']
-SPREADSHEET_NAME = os.environ['G_SPREADSHEET_NAME']
-SPREADSHEETKEY   = os.environ['G_SPREADSHEETKEY']
-WORKSHEETID      = os.environ['G_WORKSHEETID']
+SPREADSHEET_NAME = 'LakeHouseData'
+SPREADSHEETKEY = '1CS4s1hEku7nsQiQhOxJXc34Q8OhefrEvq5J4X1aTiEU'
+WORKSHEETID = 'od6'
