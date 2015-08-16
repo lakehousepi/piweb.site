@@ -1,5 +1,5 @@
 USERNAME = 'lakehousepi@gmail.com'
-PASSWORD = 'lakehousepi!'
+PASSWORD = 'lakehousepi!!'
 SERVERNAME = 'smtp.gmail.com:587'
 
 SPREADSHEET_NAME = 'LakeHouseData'
