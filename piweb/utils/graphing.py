@@ -54,7 +54,7 @@ def make_four_graphs(savefile=False, filepath=None):
         thisax = axes.flatten()[i]
         nextax = axes.flatten()[i + 1]
         nextlow, nexthigh = nextax.get_xlim()
-        thisax.axvspan(nextlow, nexthigh, alpha=0.10, color='0.2')
+        thisax.axvspan(nextlow, nexthigh, alpha=0.10, color='red')
 
     fig.tight_layout()
     if savefile:
